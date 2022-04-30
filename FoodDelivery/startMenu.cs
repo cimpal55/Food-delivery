@@ -8,19 +8,27 @@ using System.Threading;
 
 namespace FoodDelivery
 {
-    class startMenu : Interfeiss
+    class StartMenu : Interfeiss
     {
         private int Selected;
         public string[] Options = { "Info", "Main menu", "Exit" };
-        private string Prompt;
+        private string Prompt = @"
+███████╗ ██████╗  ██████╗ ██████╗     ██████╗ ███████╗██╗     ██╗██╗   ██╗███████╗██████╗ ██╗   ██╗
+██╔════╝██╔═══██╗██╔═══██╗██╔══██╗    ██╔══██╗██╔════╝██║     ██║██║   ██║██╔════╝██╔══██╗╚██╗ ██╔╝
+█████╗  ██║   ██║██║   ██║██║  ██║    ██║  ██║█████╗  ██║     ██║██║   ██║█████╗  ██████╔╝ ╚████╔╝ 
+██╔══╝  ██║   ██║██║   ██║██║  ██║    ██║  ██║██╔══╝  ██║     ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗  ╚██╔╝  
+██║     ╚██████╔╝╚██████╔╝██████╔╝    ██████╔╝███████╗███████╗██║ ╚████╔╝ ███████╗██║  ██║   ██║   
+╚═╝      ╚═════╝  ╚═════╝ ╚═════╝     ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝   ╚═╝   
+                                                                                                   
+Welcome to the food delivery programm. What would you like to do?
+(To select options use the arrow keys and press enter to select an option.)";
 
-        public startMenu(string prompt)
+        public StartMenu()
         {
-            Prompt = prompt;
             Selected = 0;
         }
 
-        public void displayOptions()
+        public override void displayOptions()
         {
             for (int i = 0; i < 1; i++)
             {
@@ -52,7 +60,7 @@ namespace FoodDelivery
             }
             ResetColor();
         }
-        public int Run()
+        public override int Run()
         {
             Selected = 0;
             ConsoleKey keyPressed;

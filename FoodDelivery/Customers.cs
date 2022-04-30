@@ -11,21 +11,9 @@ using System.Data.SqlClient;
 namespace FoodDelivery
 {
     public class Customers 
-    { 
-        public int Id;
-        public int PhoneNumber;
-        public int selected;
-        public string KlientaName;
-        public string KlientaSurname;
-        public string Address;
-        public Customers(int id, int phoneNumber, string klientaName, string klientaSurname, string address)
-        {
-                this.Id = id;
-                this.PhoneNumber = phoneNumber;
-                this.KlientaName = klientaName;
-                this.KlientaSurname = klientaSurname;
-                this.Address = address;
-        }
+    {
+        public Customers() { }
+       
         public static void ClearLine()
         {
             int currentLineCursor = Console.CursorTop;
@@ -37,44 +25,79 @@ namespace FoodDelivery
             {
                 Console.Clear();
                 Console.WriteLine("Name of customer: ");
-                string Name = Console.ReadLine(); 
-                while (String.IsNullOrEmpty(Name))
+                string Name;
+                while (true)
                 {
-                    Console.WriteLine("Write your name correctly.");
                     Name = Console.ReadLine();
-                    Console.SetCursorPosition(0, Console.CursorTop - 2);
-                    ClearLine();
+                    if (String.IsNullOrEmpty(Name))
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.WriteLine("Write your name correctly.");
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 Console.WriteLine("Surname of customer: ");
-                string Surname = Console.ReadLine();
-                while (String.IsNullOrEmpty(Surname))
+                string Surname;
+                while (true)
                 {
-                    Console.WriteLine("Write your surname correctly.");
                     Surname = Console.ReadLine();
-                    Console.SetCursorPosition(0, Console.CursorTop - 2);
-                    ClearLine();
+                    if (String.IsNullOrEmpty(Surname))
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.WriteLine("Write your surname correctly.");
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 Console.WriteLine("Phone number of customer: ");
-                string Phonenumber = Console.ReadLine();
-                bool isNumber = int.TryParse(Phonenumber, out int n);
-                while (String.IsNullOrEmpty(Phonenumber) || isNumber == false)
+                int Phonenumber;
+                while (true)
                 {
-                    Console.WriteLine("Write your phone number correctly.");
-                    Phonenumber = Console.ReadLine();
-                    Console.SetCursorPosition(0, Console.CursorTop - 2);
-                    ClearLine();
+                    string strPhonenumber = Console.ReadLine();
+                    if (String.IsNullOrEmpty(strPhonenumber) == false && int.TryParse(strPhonenumber, out Phonenumber))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.WriteLine("Write your phone number correctly.");
+                     }
                 }
 
-                Console.WriteLine("Address of customer: ");
-                string Address = Console.ReadLine();
-                while (String.IsNullOrEmpty(Address))
+                Console.WriteLine("Address of customer: ");   
+                string Address;
+                while (true)
                 {
-                    Console.WriteLine("Write your address correctly.");
                     Address = Console.ReadLine();
-                    Console.SetCursorPosition(0, Console.CursorTop - 2);
-                    ClearLine();
+                    if (String.IsNullOrEmpty(Address))
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearLine();
+                        Console.WriteLine("Write your Address correctly.");
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
@@ -128,14 +151,78 @@ namespace FoodDelivery
 
             Console.WriteLine("Enter the user id, that you would like to update: ");
             u_id = int.Parse(Console.ReadLine());
+
             Console.WriteLine("Enter the new name: ");
-            u_name = Console.ReadLine();
+            while (true)
+            {
+                u_name = Console.ReadLine();
+                if (String.IsNullOrEmpty(u_name))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write your name correctly.");
+                }
+                else
+                {
+                    break;
+                }
+            }
+
             Console.WriteLine("Enter the new surname: ");
-            u_surname = Console.ReadLine();
+            while (true)
+            {
+                u_surname = Console.ReadLine();
+                if (String.IsNullOrEmpty(u_surname))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write your surname correctly.");
+                }
+                else
+                {
+                    break;
+                }
+            }
+
             Console.WriteLine("Enter the new phone number: ");
-            u_phonenumber = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                string strPhonenumber = Console.ReadLine();
+                if (String.IsNullOrEmpty(strPhonenumber) == false && int.TryParse(strPhonenumber, out u_phonenumber))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write your phone number correctly.");
+                }
+            }
+
             Console.WriteLine("Enter the new address: ");
-            u_address = Console.ReadLine();
+            while (true)
+            {
+                u_address = Console.ReadLine();
+                if (String.IsNullOrEmpty(u_address))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write your Address correctly.");
+                }
+                else
+                {
+                    break;
+                }
+            }
 
             string update = "Update Customers SET Name = '" + u_name + "',Surname = '" + u_surname + "',Phonenumber = '" + u_phonenumber + "',Address = '" + u_address + "' WHERE Customer_id = '" + u_id + "'";
             SqlCommand updateCommand = new SqlCommand(update, sqlConnection);

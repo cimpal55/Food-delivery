@@ -10,19 +10,25 @@ using System.Threading;
 
 namespace FoodDelivery
 {
-    class mainMenu : Interfeiss
+    class MainMenu : Interfeiss
     {
         public int Selected2;
         public string[] Options2 = { "Customers", "Products", "Orders", "Back to the start menu" };
-        private string Prompt;
+        private string Prompt = @"
+███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
+██╔████╔██║███████║██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██║╚██╔╝██║██╔══██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
 
-        public mainMenu(string prompt)
+What would you like to do?";
+        public MainMenu()
         {
-            Prompt = prompt;
             Selected2 = 0;
         }
 
-        public void displayOptions2()
+        public override void displayOptions()
         {
             for (int i = 0; i < 1; i++)
             {
@@ -54,14 +60,14 @@ namespace FoodDelivery
             }
             ResetColor();
         }
-        public int Run2()
+        public override int Run()
         {
             Selected2 = 0;
             ConsoleKey keyPressed;
             do
             {
                 Clear();
-                displayOptions2();
+                displayOptions();
 
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;

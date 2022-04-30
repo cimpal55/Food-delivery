@@ -10,28 +10,32 @@ using System.Threading;
 
 namespace FoodDelivery
 {
-    class CustomerSort : Interfeiss
+    class OrderMenu : Interfeiss
     {
-        private int Selected4;
-        public string[] Options4 = { "Alphabetical Ascending order", "Alphabetical Descending order" };
+        private int Selected5;
+        public string[] Options5 = { "Create a new order", "Orders list", "Update order info", "Delete orders", "Return to the main menu"};
+        private string Prompt;
 
-        public CustomerSort()
+        public OrderMenu(string prompt)
         {
-            Selected4 = 0;
+            Prompt = prompt;
+            Selected5 = 0;
         }
+
         public override void displayOptions()
         {
             for (int i = 0; i < 1; i++)
             {
+                Console.Write(Prompt);
                 Console.WriteLine("");
                 Thread.Sleep(1);
             }
-            for (int i = 0; i < Options4.Length; i++)
+            for (int i = 0; i < Options5.Length; i++)
             {
-                string current = Options4[i];
+                string current = Options5[i];
                 string prefix1, prefix2;
 
-                if (i == Selected4)
+                if (i == Selected5)
                 {
                     prefix1 = "<<";
                     prefix2 = ">>";
@@ -52,7 +56,7 @@ namespace FoodDelivery
         }
         public override int Run()
         {
-            Selected4 = 0;
+            Selected5 = 0;
             ConsoleKey keyPressed;
             do
             {
@@ -64,24 +68,24 @@ namespace FoodDelivery
 
                 if (keyPressed == ConsoleKey.UpArrow)
                 {
-                    Selected4--;
-                    if (Selected4 == -1)
+                    Selected5--;
+                    if (Selected5 == -1)
                     {
-                        Selected4 = Options4.Length - 1;
+                        Selected5 = Options5.Length - 1;
                     }
                 }
                 else if (keyPressed == ConsoleKey.DownArrow)
                 {
-                    Selected4++;
-                    if (Selected4 == Options4.Length)
+                    Selected5++;
+                    if (Selected5 == Options5.Length)
                     {
-                        Selected4 = 0;
+                        Selected5 = 0;
                     }
                 }
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return Selected4;
+            return Selected5;
         }
     }
 }

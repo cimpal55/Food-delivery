@@ -10,14 +10,7 @@ namespace FoodDelivery
 {
     class Products
     {
-        public int ID;
-        public string Title, Description;
-        public Products(int id, string title, string description)
-        {
-            this.ID = id;
-            this.Title = title;
-            this.Description = description;
-        }
+        public Products() { }
         public static void ClearLine()
         {
             int currentLineCursor = Console.CursorTop;
@@ -40,6 +33,7 @@ namespace FoodDelivery
                 Console.WriteLine("ID: " + dataReader["Product_id"]);
                 Console.WriteLine("Title: " + dataReader["Title"]);
                 Console.WriteLine("Description: " + dataReader["Description"]);
+                Console.WriteLine("Price: " + dataReader["Price"]);
                 Console.WriteLine("-----------------------------------------------");
 
             }
@@ -72,11 +66,14 @@ namespace FoodDelivery
                 ClearLine();
             }
 
+            Console.WriteLine("Price of the product: ");
+            double productPrice = Convert.ToDouble(Console.ReadLine());
+
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 
-            string insertQuery = "INSERT INTO PRODUCTS(Title, Description) VALUES('" + productTitle + "', '" + productDescription + "')";
+            string insertQuery = "INSERT INTO PRODUCTS(Title, Description, Price) VALUES('" + productTitle + "', '" + productDescription + "', '" + productPrice + "')";
             string row = "DBCC CHECKIDENT ('Customers', RESEED)";
             SqlCommand command1 = new SqlCommand(row, sqlConnection);
             SqlCommand command2 = new SqlCommand(insertQuery, sqlConnection);
@@ -92,6 +89,7 @@ namespace FoodDelivery
             Console.Clear();
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
             int u_id;
+            double u_price;
             string u_title, u_description;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
@@ -102,8 +100,10 @@ namespace FoodDelivery
             u_title = Console.ReadLine();
             Console.WriteLine("Enter the new description: ");
             u_description = Console.ReadLine();
+            Console.WriteLine("Enter the new price: ");
+            u_price = int.Parse(Console.ReadLine());
 
-            string update = "Update Products SET Title = '" + u_title + "',Description = '" + u_description + "' WHERE Customer_id = '" + u_id + "'";
+            string update = "Update Products SET Title = '" + u_title + "',Description = '" + u_description + "',Price = '" + u_price + "' WHERE Customer_id = '" + u_id + "'";
             SqlCommand updateCommand = new SqlCommand(update, sqlConnection);
             updateCommand.ExecuteNonQuery();
             Console.WriteLine("Data updated successfully!");

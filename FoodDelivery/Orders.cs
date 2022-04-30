@@ -10,5 +10,19 @@ namespace FoodDelivery
 {
     class Orders
     {
+        public int ID;
+        public Orders(int id)
+        {
+            this.ID = id;
+        }
+
+        public void getDate()
+        {
+            DateTime aData = DateTime.Now;
+            aData.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+        }
+
+
+
     }
 }

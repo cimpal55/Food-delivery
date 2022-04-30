@@ -10,19 +10,26 @@ using System.Threading;
 
 namespace FoodDelivery
 {
-    class customerMenu : Interfeiss
+    class CustomerMenu : Interfeiss
     {
         private int Selected3;
         public string[] Options3 = { "Customers list", "Customers sorting", "Add new customers", "Update customer info", "Delete customers", "Return to the main menu"};
-        private string Prompt;
+        private string Prompt = @"
+ ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗ ███████╗
+██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗██╔════╝
+██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝███████╗
+██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║
+╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║███████║
+ ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝   
 
-        public customerMenu(string prompt)
+What would you like to do?";
+
+        public CustomerMenu()
         {
-            Prompt = prompt;
             Selected3 = 0;
         }
 
-        public void displayOptions3()
+        public override void displayOptions()
         {
             for (int i = 0; i < 1; i++)
             {
@@ -54,14 +61,14 @@ namespace FoodDelivery
             }
             ResetColor();
         }
-        public int Run3()
+        public override int Run()
         {
             Selected3 = 0;
             ConsoleKey keyPressed;
             do
             {
                 Clear();
-                displayOptions3();
+                displayOptions();
 
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;

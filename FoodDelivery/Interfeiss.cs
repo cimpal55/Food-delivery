@@ -9,8 +9,10 @@ using static System.Console;
 
 namespace FoodDelivery
 {
-    class Interfeiss
+    public abstract class Interfeiss
     {
+        public abstract void displayOptions();
+        public abstract int Run();
         public void Start()
         {
             Title = "Food Delivery";
@@ -61,20 +63,10 @@ namespace FoodDelivery
         }
         protected void RunMenu()
         {
-            string prompt = @"
-███████╗ ██████╗  ██████╗ ██████╗     ██████╗ ███████╗██╗     ██╗██╗   ██╗███████╗██████╗ ██╗   ██╗
-██╔════╝██╔═══██╗██╔═══██╗██╔══██╗    ██╔══██╗██╔════╝██║     ██║██║   ██║██╔════╝██╔══██╗╚██╗ ██╔╝
-█████╗  ██║   ██║██║   ██║██║  ██║    ██║  ██║█████╗  ██║     ██║██║   ██║█████╗  ██████╔╝ ╚████╔╝ 
-██╔══╝  ██║   ██║██║   ██║██║  ██║    ██║  ██║██╔══╝  ██║     ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗  ╚██╔╝  
-██║     ╚██████╔╝╚██████╔╝██████╔╝    ██████╔╝███████╗███████╗██║ ╚████╔╝ ███████╗██║  ██║   ██║   
-╚═╝      ╚═════╝  ╚═════╝ ╚═════╝     ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝   ╚═╝   
-                                                                                                   
-Welcome to the food delivery programm. What would you like to do?
-(To select options use the arrow keys and press enter to select an option.)";
-            startMenu Menu1 = new startMenu(prompt);
+            StartMenu Menu1 = new StartMenu();
             int Selected = Menu1.Run();
 
-            switch (Selected)
+            switch (Selected) 
             {
                 case 0:
                     InfoProgramm();
@@ -90,19 +82,9 @@ Welcome to the food delivery programm. What would you like to do?
         }
         protected void RunMenu2()
         {
-            string prompt = @"
-███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
-████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
-██╔████╔██║███████║██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
-██║╚██╔╝██║██╔══██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
-██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
-╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
-
-What would you like to do?";
-            startMenu Menu1 = new startMenu(prompt);
-            mainMenu Menu2 = new mainMenu(prompt);
-            customerMenu Menu3 = new customerMenu(prompt);
-            int Selected2 = Menu2.Run2();
+            StartMenu Menu1 = new StartMenu();
+            MainMenu Menu2 = new MainMenu();
+            int Selected2 = Menu2.Run();
 
             switch (Selected2)
             {
@@ -122,20 +104,11 @@ What would you like to do?";
 
         protected void RunCustomers()
         {
-            string prompt = @"
- ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗ ███████╗
-██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗██╔════╝
-██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝███████╗
-██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║
-╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║███████║
- ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝   
-
-What would you like to do?";
-            Customers customer = new Customers(1, 20318705, "Vladislavs", "Suspanovs", "Satiksmes iela 33-64");
-            mainMenu Menu2 = new mainMenu(prompt);
-            customerMenu Menu3 = new customerMenu(prompt);
-            customerSort sortMenu = new customerSort();
-            int Selected3 = Menu3.Run3();
+            Customers customer = new Customers();
+            MainMenu Menu2 = new MainMenu();
+            CustomerMenu Menu3 = new CustomerMenu();
+            CustomerSort sortMenu = new CustomerSort();
+            int Selected3 = Menu3.Run();
 
             switch (Selected3)
             {
@@ -144,7 +117,7 @@ What would you like to do?";
                     BackCustomers();
                     break;
                 case 1:
-                    int Selected4 = sortMenu.Run4();
+                    int Selected4 = sortMenu.Run();
                     switch (Selected4)
                     {
                         case 0:
@@ -176,18 +149,10 @@ What would you like to do?";
         }
         protected void RunProducts()
         {
-            string prompt = @"
-██████╗ ██████╗  ██████╗ ██████╗ ██╗   ██╗ ██████╗████████╗███████╗
-██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██║   ██║██╔════╝╚══██╔══╝██╔════╝
-██████╔╝██████╔╝██║   ██║██║  ██║██║   ██║██║        ██║   ███████╗
-██╔═══╝ ██╔══██╗██║   ██║██║  ██║██║   ██║██║        ██║   ╚════██║
-██║     ██║  ██║╚██████╔╝██████╔╝╚██████╔╝╚██████╗   ██║   ███████║
-╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝   ╚═╝   ╚══════╝                                                          
-What would you like to do?";
-            Products product = new Products(1, "Fujiwara", "VERY GOOD AND TASTE");
-            mainMenu Menu2 = new mainMenu(prompt);
-            productMenu Menu4 = new productMenu(prompt);
-            int Selected4 = Menu4.Run4();
+            Products product = new Products();
+            MainMenu Menu2 = new MainMenu();
+            ProductMenu Menu4 = new ProductMenu();
+            int Selected4 = Menu4.Run();
 
             switch (Selected4)
             {
@@ -245,6 +210,7 @@ What would you like to do?";
             if (i == 49)
             {
                 Clear();
+                ForegroundColor = ConsoleColor.Gray;
                 RunMenu();
             }
             for (int y = 0; y < i; y++)

@@ -13,7 +13,8 @@ namespace FoodDelivery
     {
         static void Main(string[] args)
         {
-            Interfeiss nom1 = new Interfeiss();
+            Interfeiss interfeiss = new MainMenu();
+            Interfeiss nom1 = interfeiss;
             nom1.Start();
         }
     }

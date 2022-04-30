@@ -10,19 +10,25 @@ using System.Threading;
 
 namespace FoodDelivery
 {
-    class productMenu : Interfeiss
+    class ProductMenu : Interfeiss
     {
         private int Selected4;
         public string[] Options4 = { "Products list", "Add new products", "Update product info", "Delete products", "Return to the main menu"};
-        private string Prompt;
+        private string Prompt = @"
+██████╗ ██████╗  ██████╗ ██████╗ ██╗   ██╗ ██████╗████████╗███████╗
+██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██║   ██║██╔════╝╚══██╔══╝██╔════╝
+██████╔╝██████╔╝██║   ██║██║  ██║██║   ██║██║        ██║   ███████╗
+██╔═══╝ ██╔══██╗██║   ██║██║  ██║██║   ██║██║        ██║   ╚════██║
+██║     ██║  ██║╚██████╔╝██████╔╝╚██████╔╝╚██████╗   ██║   ███████║
+╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝   ╚═╝   ╚══════╝         
 
-        public productMenu(string prompt)
+What would you like to do?";
+        public ProductMenu()
         {
-            Prompt = prompt;
             Selected4 = 0;
         }
 
-        public void displayOptions4()
+        public override void displayOptions()
         {
             for (int i = 0; i < 1; i++)
             {
@@ -54,14 +60,14 @@ namespace FoodDelivery
             }
             ResetColor();
         }
-        public int Run4()
+        public override int Run()
         {
             Selected4 = 0;
             ConsoleKey keyPressed;
             do
             {
                 Clear();
-                displayOptions4();
+                displayOptions();
 
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;
