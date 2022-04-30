@@ -12,12 +12,12 @@ namespace FoodDelivery
 {
     class CustomerSort : Interfeiss
     {
-        private int Selected4;
-        public string[] Options4 = { "Alphabetical Ascending order", "Alphabetical Descending order" };
+        private int Selected;
+        public string[] Options = { "Alphabetical Ascending order", "Alphabetical Descending order" };
 
         public CustomerSort()
         {
-            Selected4 = 0;
+            Selected = 0;
         }
         public override void displayOptions()
         {
@@ -26,12 +26,12 @@ namespace FoodDelivery
                 Console.WriteLine("");
                 Thread.Sleep(1);
             }
-            for (int i = 0; i < Options4.Length; i++)
+            for (int i = 0; i < Options.Length; i++)
             {
-                string current = Options4[i];
+                string current = Options[i];
                 string prefix1, prefix2;
 
-                if (i == Selected4)
+                if (i == Selected)
                 {
                     prefix1 = "<<";
                     prefix2 = ">>";
@@ -52,7 +52,7 @@ namespace FoodDelivery
         }
         public override int Run()
         {
-            Selected4 = 0;
+            Selected = 0;
             ConsoleKey keyPressed;
             do
             {
@@ -64,24 +64,24 @@ namespace FoodDelivery
 
                 if (keyPressed == ConsoleKey.UpArrow)
                 {
-                    Selected4--;
-                    if (Selected4 == -1)
+                    Selected--;
+                    if (Selected == -1)
                     {
-                        Selected4 = Options4.Length - 1;
+                        Selected = Options.Length - 1;
                     }
                 }
                 else if (keyPressed == ConsoleKey.DownArrow)
                 {
-                    Selected4++;
-                    if (Selected4 == Options4.Length)
+                    Selected++;
+                    if (Selected == Options.Length)
                     {
-                        Selected4 = 0;
+                        Selected = 0;
                     }
                 }
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return Selected4;
+            return Selected;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace FoodDelivery
@@ -21,7 +22,7 @@ namespace FoodDelivery
         public void ProductsList()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             string display = "SELECT * FROM Products";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
@@ -33,7 +34,6 @@ namespace FoodDelivery
                 Console.WriteLine("ID: " + dataReader["Product_id"]);
                 Console.WriteLine("Title: " + dataReader["Title"]);
                 Console.WriteLine("Description: " + dataReader["Description"]);
-                Console.WriteLine("Price: " + dataReader["Price"]);
                 Console.WriteLine("-----------------------------------------------");
 
             }
@@ -47,33 +47,48 @@ namespace FoodDelivery
         {
             Console.Clear();
             Console.WriteLine("Title of the product: ");
-            string productTitle = Console.ReadLine();
-            while (String.IsNullOrEmpty(productTitle))
+            string productTitle;
+            while (true)
             {
-                Console.WriteLine("Write title correctly.");
                 productTitle = Console.ReadLine();
-                Console.SetCursorPosition(0, Console.CursorTop - 2);
-                ClearLine();
+                if (String.IsNullOrEmpty(productTitle))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write product title correctly.");
+                }
+                else
+                {
+                    break;
+                }
             }
 
             Console.WriteLine("Description of the product: ");
-            string productDescription = Console.ReadLine();
-            while (String.IsNullOrEmpty(productDescription))
+            string productDescription;
+            while (true)
             {
-                Console.WriteLine("Write description correctly.");
                 productDescription = Console.ReadLine();
-                Console.SetCursorPosition(0, Console.CursorTop - 2);
-                ClearLine();
+                if (String.IsNullOrEmpty(productDescription))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write product description correctly.");
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            Console.WriteLine("Price of the product: ");
-            double productPrice = Convert.ToDouble(Console.ReadLine());
-
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 
-            string insertQuery = "INSERT INTO PRODUCTS(Title, Description, Price) VALUES('" + productTitle + "', '" + productDescription + "', '" + productPrice + "')";
+            string insertQuery = "INSERT INTO PRODUCTS(Title, Description) VALUES('" + productTitle + "', '" + productDescription + "')";
             string row = "DBCC CHECKIDENT ('Customers', RESEED)";
             SqlCommand command1 = new SqlCommand(row, sqlConnection);
             SqlCommand command2 = new SqlCommand(insertQuery, sqlConnection);
@@ -87,7 +102,7 @@ namespace FoodDelivery
         public void UpdateProduct()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             int u_id;
             double u_price;
             string u_title, u_description;
@@ -96,12 +111,60 @@ namespace FoodDelivery
 
             Console.WriteLine("Enter the product id, that you would like to update: ");
             u_id = int.Parse(Console.ReadLine());
+
             Console.WriteLine("Enter the new title: ");
-            u_title = Console.ReadLine();
+            while (true)
+            {
+                u_title = Console.ReadLine();
+                if (String.IsNullOrEmpty(u_title))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write product title correctly.");
+                }
+                else
+                {
+                    break;
+                }
+            }
+
             Console.WriteLine("Enter the new description: ");
-            u_description = Console.ReadLine();
+            while (true)
+            {
+                u_description = Console.ReadLine();
+                if (String.IsNullOrEmpty(u_description))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write product title correctly.");
+                }
+                else
+                {
+                    break;
+                }
+            }
+
             Console.WriteLine("Enter the new price: ");
-            u_price = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                u_price = int.Parse(Console.ReadLine());
+                if (String.IsNullOrEmpty(Convert.ToString(u_price)))
+                {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    ClearLine();
+                    Console.WriteLine("Write product title correctly.");
+                }
+                else
+                {
+                    break;
+                }
+            }
 
             string update = "Update Products SET Title = '" + u_title + "',Description = '" + u_description + "',Price = '" + u_price + "' WHERE Customer_id = '" + u_id + "'";
             SqlCommand updateCommand = new SqlCommand(update, sqlConnection);
@@ -113,7 +176,7 @@ namespace FoodDelivery
         public void DeleteProduct()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
@@ -18,7 +19,6 @@ namespace FoodDelivery
             Title = "Food Delivery";
             RunMenu();
         }
-
         public void Back()
         {
             Console.WriteLine("To return to the menu press ENTER");
@@ -61,6 +61,20 @@ namespace FoodDelivery
                 RunProducts();
             }
         }
+        public void BackOrders()
+        {
+            Console.WriteLine("To return to the menu press ENTER");
+
+            ConsoleKey keyPressed;
+            ConsoleKeyInfo keyInfo = ReadKey(true);
+            keyPressed = keyInfo.Key;
+
+            if (keyPressed == ConsoleKey.Enter)
+            {
+                Clear();
+                RunOrders();
+            }
+        }
         protected void RunMenu()
         {
             StartMenu Menu1 = new StartMenu();
@@ -82,11 +96,11 @@ namespace FoodDelivery
         }
         protected void RunMenu2()
         {
-            StartMenu Menu1 = new StartMenu();
+            OrderMenu orderMenu = new OrderMenu();
             MainMenu Menu2 = new MainMenu();
-            int Selected2 = Menu2.Run();
+            int Selected = Menu2.Run();
 
-            switch (Selected2)
+            switch (Selected)
             {
                 case 0:
                     RunCustomers();
@@ -95,9 +109,10 @@ namespace FoodDelivery
                     RunProducts();
                     break;
                 case 2:
+                    RunOrders();
                     break;
                 case 3:
-                    Menu1.RunMenu();
+                    RunMenu();
                     break;
             }
         }
@@ -105,20 +120,19 @@ namespace FoodDelivery
         protected void RunCustomers()
         {
             Customers customer = new Customers();
-            MainMenu Menu2 = new MainMenu();
             CustomerMenu Menu3 = new CustomerMenu();
             CustomerSort sortMenu = new CustomerSort();
-            int Selected3 = Menu3.Run();
+            int Selected = Menu3.Run();
 
-            switch (Selected3)
+            switch (Selected)
             {
                 case 0:
                     customer.CustomersList();
                     BackCustomers();
                     break;
                 case 1:
-                    int Selected4 = sortMenu.Run();
-                    switch (Selected4)
+                    int Selected2 = sortMenu.Run();
+                    switch (Selected2)
                     {
                         case 0:
                             customer.SortingASC();
@@ -143,7 +157,7 @@ namespace FoodDelivery
                     RunCustomers();
                     break;
                 case 5:
-                    Menu2.RunMenu2();
+                    RunMenu2();
                     break;
             }
         }
@@ -152,9 +166,9 @@ namespace FoodDelivery
             Products product = new Products();
             MainMenu Menu2 = new MainMenu();
             ProductMenu Menu4 = new ProductMenu();
-            int Selected4 = Menu4.Run();
+            int Selected = Menu4.Run();
 
-            switch (Selected4)
+            switch (Selected)
             {
                 case 0:
                     product.ProductsList();
@@ -176,7 +190,34 @@ namespace FoodDelivery
                     Menu2.RunMenu2();
                     break;
             }
-        } 
+        }
+
+        protected void RunOrders()
+        {
+            OrderMenu orderMenu = new OrderMenu();
+            Orders orders = new Orders();
+            MainMenu Menu2 = new MainMenu();
+            int Selected = orderMenu.Run();
+
+            switch (Selected)
+            {
+                case 0:
+                    orders.AddOrder();
+                    RunOrders();
+                    break;
+                case 1:
+                    orders.OrdersList();
+                    BackOrders();
+                    break;
+                case 2:
+                    orders.DeleteOrder();
+                    RunOrders();
+                    break;
+                case 3:
+                    Menu2.RunMenu2();
+                    break;
+            }
+        }
         protected void Exit()
         {
             Console.WriteLine("\nPress any key to exit...");

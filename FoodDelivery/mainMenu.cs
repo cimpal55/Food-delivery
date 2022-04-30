@@ -12,8 +12,8 @@ namespace FoodDelivery
 {
     class MainMenu : Interfeiss
     {
-        public int Selected2;
-        public string[] Options2 = { "Customers", "Products", "Orders", "Back to the start menu" };
+        public int Selected;
+        public string[] Options = { "Customers", "Products", "Orders", "Back to the start menu" };
         private string Prompt = @"
 ███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
 ████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
@@ -25,7 +25,7 @@ namespace FoodDelivery
 What would you like to do?";
         public MainMenu()
         {
-            Selected2 = 0;
+            Selected = 0;
         }
 
         public override void displayOptions()
@@ -36,12 +36,12 @@ What would you like to do?";
                 Console.WriteLine("");
                 Thread.Sleep(1);
             }
-            for (int i = 0; i < Options2.Length; i++)
+            for (int i = 0; i < Options.Length; i++)
             {
-                string current = Options2[i];
+                string current = Options[i];
                 string prefix1, prefix2;
 
-                if (i == Selected2)
+                if (i == Selected)
                 {
                     prefix1 = "<<";
                     prefix2 = ">>";
@@ -62,7 +62,7 @@ What would you like to do?";
         }
         public override int Run()
         {
-            Selected2 = 0;
+            Selected = 0;
             ConsoleKey keyPressed;
             do
             {
@@ -74,24 +74,24 @@ What would you like to do?";
 
                 if (keyPressed == ConsoleKey.UpArrow)
                 {
-                    Selected2--;
-                    if (Selected2 == -1)
+                    Selected--;
+                    if (Selected == -1)
                     {
-                        Selected2 = Options2.Length - 1;
+                        Selected = Options.Length - 1;
                     }
                 }
                 else if (keyPressed == ConsoleKey.DownArrow)
                 {
-                    Selected2++;
-                    if (Selected2 == Options2.Length)
+                    Selected++;
+                    if (Selected == Options.Length)
                     {
-                        Selected2 = 0;
+                        Selected = 0;
                     }
                 }
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return Selected2;
+            return Selected;
         }
     }
 }

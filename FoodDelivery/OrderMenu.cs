@@ -12,14 +12,21 @@ namespace FoodDelivery
 {
     class OrderMenu : Interfeiss
     {
-        private int Selected5;
-        public string[] Options5 = { "Create a new order", "Orders list", "Update order info", "Delete orders", "Return to the main menu"};
-        private string Prompt;
+        private int Selected;
+        public string[] Options = { "Create a new order", "Orders list", "Delete order", "Return to the main menu"};
+        private string Prompt = @"
+ ██████╗ ██████╗ ██████╗ ███████╗██████╗ ███████╗
+██╔═══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔════╝
+██║   ██║██████╔╝██║  ██║█████╗  ██████╔╝███████╗
+██║   ██║██╔══██╗██║  ██║██╔══╝  ██╔══██╗╚════██║
+╚██████╔╝██║  ██║██████╔╝███████╗██║  ██║███████║
+ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
+  
+What would you like to do?";
 
-        public OrderMenu(string prompt)
+        public OrderMenu()
         {
-            Prompt = prompt;
-            Selected5 = 0;
+            Selected = 0;
         }
 
         public override void displayOptions()
@@ -30,12 +37,12 @@ namespace FoodDelivery
                 Console.WriteLine("");
                 Thread.Sleep(1);
             }
-            for (int i = 0; i < Options5.Length; i++)
+            for (int i = 0; i < Options.Length; i++)
             {
-                string current = Options5[i];
+                string current = Options[i];
                 string prefix1, prefix2;
 
-                if (i == Selected5)
+                if (i == Selected)
                 {
                     prefix1 = "<<";
                     prefix2 = ">>";
@@ -56,7 +63,7 @@ namespace FoodDelivery
         }
         public override int Run()
         {
-            Selected5 = 0;
+            Selected = 0;
             ConsoleKey keyPressed;
             do
             {
@@ -68,24 +75,24 @@ namespace FoodDelivery
 
                 if (keyPressed == ConsoleKey.UpArrow)
                 {
-                    Selected5--;
-                    if (Selected5 == -1)
+                    Selected--;
+                    if (Selected == -1)
                     {
-                        Selected5 = Options5.Length - 1;
+                        Selected = Options.Length - 1;
                     }
                 }
                 else if (keyPressed == ConsoleKey.DownArrow)
                 {
-                    Selected5++;
-                    if (Selected5 == Options5.Length)
+                    Selected++;
+                    if (Selected == Options.Length)
                     {
-                        Selected5 = 0;
+                        Selected = 0;
                     }
                 }
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return Selected5;
+            return Selected;
         }
     }
 }

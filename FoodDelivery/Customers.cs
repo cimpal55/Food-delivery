@@ -13,7 +13,6 @@ namespace FoodDelivery
     public class Customers 
     {
         public Customers() { }
-       
         public static void ClearLine()
         {
             int currentLineCursor = Console.CursorTop;
@@ -100,7 +99,7 @@ namespace FoodDelivery
                     }
                 }
 
-                string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+                string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
                 sqlConnection.Open();
 
@@ -118,7 +117,7 @@ namespace FoodDelivery
         public void CustomersList()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             string display = "SELECT * FROM Customers";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
@@ -143,7 +142,7 @@ namespace FoodDelivery
         public void UpdateCustomer()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             int u_id, u_phonenumber; 
             string u_name, u_surname, u_address;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -234,7 +233,7 @@ namespace FoodDelivery
         public void DeleteCustomer()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 
@@ -251,7 +250,7 @@ namespace FoodDelivery
         public void SortingASC()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 
@@ -282,7 +281,7 @@ namespace FoodDelivery
         public void SortingDESC()
         {
             Console.Clear();
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dungeon master\source\repos\FoodDelivery\FoodDelivery\Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 
