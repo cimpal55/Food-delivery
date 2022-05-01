@@ -124,5 +124,53 @@ namespace FoodDelivery
             System.Threading.Thread.Sleep(500);
             sqlConnection.Close();
         }
+        public void OrdersCustomersSummary()
+        {
+            Console.Clear();
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+
+            string summary = @"SELECT Customer_id, Count(Orders.Order_id) AS TotalOrder FROM [Orders] Where Customer_id = Customer_id GROUP BY Customer_id Order BY Count(Orders.Order_id) DESC;";
+            SqlCommand sqlCommand = new SqlCommand(summary, sqlConnection);
+            
+            SqlDataReader dataReader = sqlCommand.ExecuteReader();
+            Console.WriteLine("-----------------------------------------------");
+            while (dataReader.Read())
+            {
+                Console.WriteLine("Customer: " + dataReader["Customer_id"]);
+                Console.WriteLine("Total orders: " + dataReader["TotalOrder"]);
+                Console.WriteLine("-----------------------------------------------");
+
+            }
+            Console.WriteLine();
+            dataReader.Close();
+            sqlConnection.Close();
+            Console.WriteLine("");
+        }
+        public void OrdersProductsSummary()
+        {
+            Console.Clear();
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+
+            string summary = @"SELECT Product_id, Count(Orders.Order_id) AS TotalProducts FROM [Orders] Where Product_id = Product_id GROUP BY Product_id Order BY Count(Orders.Order_id) DESC;";
+            SqlCommand sqlCommand = new SqlCommand(summary, sqlConnection);
+
+            SqlDataReader dataReader = sqlCommand.ExecuteReader();
+            Console.WriteLine("-----------------------------------------------");
+            while (dataReader.Read())
+            {
+                Console.WriteLine("Product: " + dataReader["Product_id"]);
+                Console.WriteLine("Total orders: " + dataReader["TotalProducts"]);
+                Console.WriteLine("-----------------------------------------------");
+
+            }
+            Console.WriteLine();
+            dataReader.Close();
+            sqlConnection.Close();
+            Console.WriteLine("");
+        }
     }
 }

@@ -10,30 +10,19 @@ using System.Threading;
 
 namespace FoodDelivery
 {
-    class OrderMenu : Interfeiss
+    class OrdersSummary : Interfeiss
     {
         private int Selected;
-        public string[] Options = { "Create a new order", "Orders list", "Summary", "Delete order", "Return to the main menu" };
-        private string Prompt = @"
- ██████╗ ██████╗ ██████╗ ███████╗██████╗ ███████╗
-██╔═══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔════╝
-██║   ██║██████╔╝██║  ██║█████╗  ██████╔╝███████╗
-██║   ██║██╔══██╗██║  ██║██╔══╝  ██╔══██╗╚════██║
-╚██████╔╝██║  ██║██████╔╝███████╗██║  ██║███████║
- ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
-  
-What would you like to do?";
+        public string[] Options = { "Orders - Customers", "Orders - Products" };
 
-        public OrderMenu()
+        public OrdersSummary()
         {
             Selected = 0;
         }
-
         public override void displayOptions()
         {
             for (int i = 0; i < 1; i++)
             {
-                Console.Write(Prompt);
                 Console.WriteLine("");
                 Thread.Sleep(1);
             }

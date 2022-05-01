@@ -96,7 +96,6 @@ namespace FoodDelivery
         }
         protected void RunMenu2()
         {
-            OrderMenu orderMenu = new OrderMenu();
             MainMenu Menu2 = new MainMenu();
             int Selected = Menu2.Run();
 
@@ -195,6 +194,7 @@ namespace FoodDelivery
         protected void RunOrders()
         {
             OrderMenu orderMenu = new OrderMenu();
+            OrdersSummary ordersummary = new OrdersSummary();
             Orders orders = new Orders();
             MainMenu Menu2 = new MainMenu();
             int Selected = orderMenu.Run();
@@ -210,10 +210,24 @@ namespace FoodDelivery
                     BackOrders();
                     break;
                 case 2:
+                    int Selected2 = ordersummary.Run();
+                    switch (Selected2)
+                    {
+                        case 0:
+                            orders.OrdersCustomersSummary();
+                            BackOrders();
+                            break;
+                        case 1:
+                            orders.OrdersProductsSummary();
+                            BackOrders();
+                            break;
+                    }
+                    break;
+                case 3:
                     orders.DeleteOrder();
                     RunOrders();
                     break;
-                case 3:
+                case 4:
                     Menu2.RunMenu2();
                     break;
             }
